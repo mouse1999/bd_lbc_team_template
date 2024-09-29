@@ -1,79 +1,108 @@
-# [team name] Design Document
+# oneSquadDesign Document
 
-## Instructions
 
-*Save a copy of this template for your team in the same folder that contains
-this template.*
-
-*Replace italicized text (including this text!) with details of the design you
-are proposing for your team project. (Your replacement text shouldn't be in
-italics)*
-
-*You should take a look at the example design document in the same folder as
-this template for more guidance on the types of information to capture, and the
-level of detail to aim for.*
-
-## *Project Title* Design
+## *Food Delivery Application* Design
 
 ## 1. Problem Statement
 
-*Explain clearly what problem you are trying to solve.*
+The goal of this project is to develop a simple food delivery application that allows customers to browse restaurants,
+view menus, place orders, and receive order confirmations. The application should connect customers to their preferred restaurants,
+facilitating a seamless ordering experience.
+
 
 
 ## 2. Top Questions to Resolve in Review
 
-*List the most important questions you have about your design, or things that
-you are still debating internally that you might like help working through.*
+1. Should there be different roles for users and restaurant owners?
+   
+2. How should cancellations be handled from both the user and restaurant sides? Is it better for only users to cancel orders,
+ while restaurant owners focus solely on updating the status of the cuisine or food item? 
+ 
+3. Should there be filters for cuisine, or price range? 
 
-1.   
-2.   
-3.  
+4. Should the app use push notifications for real-time updates?
 
 ## 3. Use Cases
 
-*This is where we work backwards from the customer and define what our customers
-would like to do (and why). You may also include use cases for yourselves, or
-for the organization providing the product to customers.*
+U1. As a user, I want to create an account so that I can place orders and manage my profile.
 
-U1. *As a [product] customer, I want to `<result>` when I `<action>`*
+U2. As a user, I want to update my account information so that my profile details are current.
 
-U2. *As a [product] customer, I want to view my grocery list when I log into the
-grocery list page*
-    
-U3. ...
+U3. As a user, I want to delete my account if I no longer wish to use the service.
+
+U4. As a restaurant owner, I want to create an account so that I can add menus and receive orders.
+
+U5. As a user, I want to view a list of all available restaurants so that I can choose where to order from.
+
+U6. As a user, I want to view the menu of a specific restaurant so that I can decide what to order.
+
+U7. As a restaurant owner, I want to add a new menu so that customers can see and order from my menu.
+
+U8. As a restaurant owner, I want to delete all menus in case the menu is outdated or no longer available.
+
+U9. As a user, I want to search for food by name or price so I can easily find the dishes I am interested in.
+
+U10. As a user, I want to view all menus across different restaurants to explore options.
+
+U11. As a user, I want to place an order from a restaurant.
+
+U12. As a user, I want to view a list of all my orders so that I can keep track of my order history.
+
+U13. As a user, I want to view the details of a specific order using an order ID.
+
+U14. As a user, I want to cancel an order if I change my mind.
+
+U15. As a restaurant owner, I want to view the list of orders placed at my restaurant so that I can process them.
 
 ## 4. Project Scope
-
-*Clarify which parts of the problem you intend to solve. It helps reviewers know
-what questions to ask to make sure you are solving for what you say and stops
-discussions from getting sidetracked by aspects you do not intend to handle in
-your design.*
 
 ### 4.1. In Scope
 
 *Which parts of the problem defined in Sections 1 and 3 will you solve with this
 design?*
 
+* Allow users to register and log in to the application.
+
+* Enable users to browse a list of available restaurants.
+
+* Provide users with menus from selected restaurants.
+
+* Allow users to place orders from their chosen restaurant.
+
+* Send order confirmation notifications to users.
+
 ### 4.2. Out of Scope
 
-*Based on your problem description in Sections 1 and 3, are there any aspects
-you are not planning to solve? Do potential expansions or related problems occur
-to you that you want to explicitly say you are not worrying about now? Feel free
-to put anything here that you think your team can't accomplish in the unit, but
-would love to do with more time.*
+
+* Handling payments is not part of this version.
+
+* The app won't provide real-time delivery tracking.
+
+* No system for customer reviews or ratings for restaurants or food items.
+
+* No notifications for order status updates.
+
+* No advanced search capabilities, such as filtering restaurants by ratings, distance, or other criteria.
+
+* The app will not support promo codes, discounts, or loyalty rewards.
+
+* No authentication will be required for restaurants to add or update their menu items after creating an account.
+
 
 # 5. Proposed Architecture Overview
 
-*Describe broadly how you are proposing to solve for the requirements you
-described in Section 3.*
+This initial iteration will provide the minimum lovable product (MLP) for a food delivery application, focusing
+on key functionalities like account creation for users and restaurants, menu management, order placement, and retrieval of orders.
+We will use API Gateway and AWS Lambda to create multiple endpoints that handle user and restaurant registration, menu management, and 
+order placement, ensuring the basic requirements of the app are satisfied.
+*include names of API later.*
 
-*This may include class diagram(s) showing what components you are planning to
-build.*
+We will store users, restaurants, menus, orders, and food items in separate DynamoDB tables. Each entity will have its dedicated 
+table, while relationships between entities (such as restaurant menus and user orders) will be handled efficiently using partition 
+and sort keys in DynamoDB.
 
-*You should argue why this architecture (organization of components) is
-reasonable. That is, why it represents a good data flow and a good separation of
-concerns. Where applicable, argue why this architecture satisfies the stated
-requirements.*
+The food delivery service will also provide a web interface for users to browse restaurants, view menus, and place orders, as 
+well as for restaurant owners to manage their menus.
 
 # 6. API
 
